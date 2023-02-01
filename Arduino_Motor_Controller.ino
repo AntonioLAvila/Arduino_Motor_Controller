@@ -1,5 +1,10 @@
 #include <string.h>
 
+#define motor1 3;
+#define motor2 5;
+#define motor3 6;
+#define motor4 9;
+
 float powers[4];
 
 void setup() {
