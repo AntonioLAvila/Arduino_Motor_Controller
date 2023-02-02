@@ -20,18 +20,22 @@ class Motor{
         void setMotor(float percentPower){
             if(percentPower>1) percentPower = 1;
             if(percentPower<-1) percentPower = -1;
+            float out;
             if(percentPower < 0){
-                if(isFwd) isFwd = false;
-                digitalWrite(fwd, LOW);
-                digitalWrite(reverse, HIGH);
-                float out = map(percentPower, -1, 1, 0, 255);
-                analogWrite(pwm, out);
+                if(isFwd){
+                    isFwd = false;
+                    digitalWrite(fwd, LOW);
+                    digitalWrite(reverse, HIGH);
+                }
+                out = map(percentPower, -1.0, 0.0, 240.0, 0.0);
             }else{
-                if(!isFwd) isFwd = true;
-                digitalWrite(fwd, HIGH);
-                digitalWrite(reverse, LOW);
-                float out = map(percentPower, -1, 1, 0, 255);
-                analogWrite(pwm, out);
+                if(!isFwd){
+                    isFwd = true;
+                    digitalWrite(fwd, HIGH);
+                    digitalWrite(reverse, LOW);
+                }
+                out = map(percentPower, 0, 1.0, 0.0, 240.0);
             }
+            analogWrite(pwm, out);
         }
 };
