@@ -9,12 +9,11 @@ void setup() {
 void loop() {
   if(Serial.available()){
     String command = Serial.readStringUntil('\0');
-    char* buffer;
+    char buffer[21];
     command.toCharArray(buffer, 21);  //is null terminated
 
     if(buffer[0] == 'H'){
-      buffer = buffer + 1;
-      char* split = strtok(buffer, ",");
+      char* split = strtok(buffer + 1, ",");
       int i = 0;
       while(split != NULL){
         powers[i] = atof(split);
