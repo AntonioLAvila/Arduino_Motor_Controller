@@ -1,14 +1,17 @@
 #include <string.h>
+#include "Motor.cpp"
 
-#define motor1 3;
-#define motor2 5;
-#define motor3 6;
-#define motor4 9;
+float powers[4] = {0,0,0,0};
+Motor motor1(1,2,3);
+Motor motor2(4,5,6);
+Motor motor3(7,8,9);
+Motor motor4(10,11,12);
 
-float powers[4];
+Motor* base[4] = {&motor1, &motor2, &motor3, &motor4};
 
 void setup() {
   Serial.begin(9600);
+  setMotors();
 }
 
 void loop() {
@@ -26,5 +29,12 @@ void loop() {
         i++;
       }
     }    
+  }
+  setMotors();
+}
+
+void setMotors(){
+  for(int i = 0; i < 4; i++){
+    base[i]->setMotor(powers[i]);
   }
 }
